@@ -4,8 +4,8 @@ const database = require('./manager/database');
 
 const conn = new database({
     host: "localhost",
-    user: "steve",
-    password: "root",
+    user: "root",
+    password: "",
     database: "carrental"
 });
 
