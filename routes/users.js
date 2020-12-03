@@ -119,6 +119,18 @@ router.get("/", auth, async(req, res) => {
     }
 });
 
+// gets user
+router.get("/:id", auth, async(req, res) => {
+    try {
+        if (!req.params.id) 
+            return res.status(400).send({message: "The user id is required!"});
+        
+        res.status(200).send(await appDataManager.findUserByID(req.params.id));
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 // updates user
 router.put("/", auth, async(req, res) => {
     try {  
