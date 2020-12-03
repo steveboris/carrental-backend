@@ -5,11 +5,20 @@ const Database = require("./database");
 
 class AppDataManager {
 
+    // user
     findAllUsers() {
         return db.query("SELECT * FROM users").then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
+        });
+    }
+
+    findUserByID(userID) {
+        return db.query("SELECT * FROM users WHERE id = ?", userID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err)
         });
     }
     
@@ -66,6 +75,71 @@ class AppDataManager {
             user.registrationDate,
             userid
         ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+    
+    // brand
+    addBrand(brand) {
+        return db.query("INSERT INTO brands (name, dateOfCreation, lastUpdate) VALUES (?, ?, ?)", [
+            brand.name,
+            brand.dateOfCreation,
+            brand.lastUpdate
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findBrandById(brandID) {
+        return db.query("SELECT * FROM brands WHERE id = ?", brandID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findBrandByName(name) {
+        return db.query("SELECT * FROM brands WHERE name LIKE ?", "%" + name + "%").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findBrandByDate(date) {
+        return db.query("SELECT * FROM brands WHERE dateOfCreation LIKE ?", "%" + date + "%").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateBrand(brandID, brand) {
+        return db.query("UPDATE brands SET name = ?, dateOfcreation = ? WHERE id = ?", [
+            brand.name,
+            brand.dateOfCreation,
+            brandID
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    deletebrand(brandID) {
+        return db.query("DELETE FROM brands WHERE id = ?", brandID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findAllBrands() {
+        return db.query("SELECT * FROM brands").then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
