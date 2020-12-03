@@ -1,7 +1,6 @@
 --
 -- Database name: `carrental`
 --
-DROP TABLE IF EXISTS admin;
 DROP TABLE IF EXISTS brands;
 DROP TABLE IF EXISTS booking;
 DROP TABLE IF EXISTS cars;
@@ -12,24 +11,6 @@ DROP TABLE IF EXISTS categories;
 
 -- --------------------------------------------------------
 --
--- Table structure for table `admin`
---
-CREATE TABLE IF NOT EXISTS `admin`
-(
-    `id`           int(11)      NOT NULL,
-    `username`     varchar(100) NOT NULL,
-    `email`      varchar(100) NOT NULL,
-    `password`     varchar(100) NOT NULL,
-    `lastUpdate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
-  DEFAULT CHARSET = latin1;
-
--- INSERT INTO `admin` (`id`, `username`, `email`, `password`, `lastUpdate`)
--- VALUES (1, 'admin', 'admin@local.com', '21232f297a57a5a743894a0e4a801fc3', default);
-
--- --------------------------------------------------------
---
 -- Table structure for table `brands`
 --
 CREATE TABLE IF NOT EXISTS `brands` (
@@ -37,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `brands` (
    `name` varchar(120) NOT NULL,
    `dateOfCreation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
    `lastUpdate`   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `brands` (`id`, `name`, `dateOfCreation`, `lastUpdate`)
 VALUES (1, 'MERCEDES', default, default),
@@ -53,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `location` (
       `name` varchar(120) DEFAULT NULL,
       `country` varchar(120) DEFAULT NULL,
       `dateOfCreation` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `location` (`id`, `name`, `country`,`dateOfCreation`) VALUES
 (1, 'Berlin', 'Deutschland', default),
@@ -68,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
       `id` int(11) NOT NULL,
       `name` varchar(120) DEFAULT NULL,
       `dateOfCreation` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `categories` (`id`, `name`,`dateOfCreation`) VALUES
 (1, 'Kleinwagen', default),
@@ -97,12 +78,12 @@ CREATE TABLE IF NOT EXISTS `cars` (
      `image2` varchar(120) DEFAULT NULL,
      `image3` varchar(120) DEFAULT NULL,
      `image4` varchar(120) DEFAULT NULL,
-     `regDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
      `lastUpdate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `cars` (`id`, `title`, `brand`, `location`,`category`, `color`, `details`, `pricePerDay`, `fuelType`, `modelYear`,
-                    `seatingCapacity`, `image1`, `image2`, `image3`, `image4`,`regDate`, `LastUpdate`)
+                    `seatingCapacity`, `image1`, `image2`, `image3`, `image4`,`registrationDate`, `LastUpdate`)
 VALUES (1, 'ML 240', 1, 1, 1, 'Schwarz', 'Mercedes ML 240 ll', 45, 'Benzin', 2020, 7, NULL, NULL, NULL, NULL, default, default),
        (2, 'X7', 2, 2, 1, 'Blau', 'BMW X7', 45, 'Benzin', 2020, 7, NULL, NULL, NULL, NULL, default, default),
        (3, 'A8', 1, 3,1,'Silber', 'Audi A8', 35, 'Benzin', 2020, 7, NULL, NULL, NULL, NULL, default, default);
@@ -122,16 +103,17 @@ CREATE TABLE IF NOT EXISTS `users` (
       `address` varchar(255) DEFAULT NULL,
       `city` varchar(100) DEFAULT NULL,
       `country` varchar(100) DEFAULT NULL,
-      `regDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+      `type` varchar(50) NOT NULL,
+      `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
       `lastUpdate` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
--- INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phone`, `address`, `city`, `country`,
---                     `regDate`, `lastUpdate`)
+-- INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phone`, `address`, `city`, `country`, `type`,
+--                     `registrationDate`, `lastUpdate`)
 -- VALUES (1, 'Danielle', 'danielle@local.com', '21232f297a57a5a743894a0e4a801fc3', 015276899452, '15/02/2020',
---        'Brandenburgerstr. 1', 'Berlin', 'Deutschland', default, default),
+--        'Brandenburgerstr. 1', 'Berlin', 'Deutschland', 'admin', default, default),
 --       (2, 'Marie', 'marie@local.com', '21232f297a57a5a743894a0e4a801fc3', 015171895552, '15/02/2020',
---        'Bergerstr. 1', 'Brandenburg', 'Deutschland', default, default);
+--        'Bergerstr. 1', 'Brandenburg', 'Deutschland', 'admin', default, default);
 -- --------------------------------------------------------
 --
 -- Table structure for table `booking`
@@ -146,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `booking` (
     `details` varchar(255) DEFAULT NULL,
     `status` int(11) DEFAULT NULL,
     `postingDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- INSERT INTO `booking` (`id`, `userID`, `carID`, `fromDate`, `toDate`, `details`, `status`, `postingDate`)
 -- VALUES (1, 'booking@test.com', 1, '2020-02-14 09:34:04', '2020-02-20 09:34:04', 'Danke für die Punktlichkeit', 1, default);
@@ -163,18 +145,12 @@ CREATE TABLE IF NOT EXISTS `contactus` (
    `details` longtext,
    `postingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- INSERT INTO `contactus` (`id`, `Name`, `Email`, `phone`, `details`, `postingDate`, `status`)
 -- VALUES (1, 'Titus', 'tituslepro@test.com', 015623178952, 'I would like to have more information about the rental process', default, 1);
 
 -- --------------------------------------------------------
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-    ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `booking`
 --
@@ -218,40 +194,37 @@ ALTER TABLE `categories`
 --
 -- Tables settings
 --
-ALTER TABLE `admin`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
 ALTER TABLE `location`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
 ALTER TABLE `categories`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------------------
