@@ -63,7 +63,7 @@ router.delete("/:id", auth, async(req, res) => {
         if (!req.params.id)
             return res.status(400).send({message: "The brand id is required!"});
         
-        await appDataManager.deletebrand(req.params.id);
+        await appDataManager.deleteBrand(req.params.id);
         res.status(200).send({message: "Brand successfully deleted!"});
 
     } catch (error) {

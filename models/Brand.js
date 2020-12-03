@@ -5,7 +5,7 @@ function Brand(body) {
     this.dateOfCreation = body.dateOfCreation;
 }
 
-// validate a registration
+// validate a brand
 Brand.prototype.validateBrand = function(brand) {
     const schema = Joi.object({
         name: Joi.string().min(5).max(50).required(),
