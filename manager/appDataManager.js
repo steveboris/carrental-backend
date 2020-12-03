@@ -130,7 +130,7 @@ class AppDataManager {
         });
     }
 
-    deletebrand(brandID) {
+    deleteBrand(brandID) {
         return db.query("DELETE FROM brands WHERE id = ?", brandID).then(rows => {
             return rows;
         }).catch(err => {
@@ -140,6 +140,56 @@ class AppDataManager {
 
     findAllBrands() {
         return db.query("SELECT * FROM brands").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    // location
+    addLocation(location) {
+        return db.query("INSERT INTO location (name, country, dateOfCreation) VALUES (?, ?, ?)", [
+            location.name,
+            location.country,
+            location.dateOfCreation
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findLocationByName(name) {
+        return db.query("SELECT * FROM location WHERE name LIKE ?", "%" + name + "%").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateLocation(locationID, location) {
+        return db.query("UPDATE location SET name = ?, country = ?, dateOfcreation = ? WHERE id = ?", [
+            location.name,
+            location.country,
+            location.dateOfCreation,
+            locationID
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    deleteLocation(locationID) {
+        return db.query("DELETE FROM location WHERE id = ?", locationID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findAllLocations() {
+        return db.query("SELECT * FROM location").then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
