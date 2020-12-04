@@ -1,0 +1,5 @@
+{
+    "name": "car rental App",
+    "jwtPrivateKey": "54321",
+    "expireIn": "24h"
+}
