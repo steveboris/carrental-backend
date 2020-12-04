@@ -299,6 +299,130 @@ class AppDataManager {
             console.log(err);
         });
     }
+
+    // cars
+    addCar(car) {
+        return db.query("INSERT INTO cars (title, brandID, locationID, categoryID, color, details, pricePerDay, fuelType, modelYear, seatingCapacity, image1, image2, image3, image4, registrationDate, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+            car.title,
+            car.brandID,
+            car.locationID,
+            car.categoryID,
+            car.color,
+            car.details,
+            car.pricePerDay,
+            car.fuelType,
+            car.modelYear,
+            car.seatingCapacity,
+            car.image1,
+            car.image2,
+            car.image3,
+            car.image4,
+            car.registrationDate,
+            car.lastUpdate
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByLocation(locationID) {
+        return db.query("SELECT * FROM cars WHERE locationID = ?", locationID).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByBrand(brandID) {
+        return db.query("SELECT * FROM cars WHERE brandID = ?", brandID).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByCategory(catID) {
+        return db.query("SELECT * FROM cars WHERE categoryID = ?", catID).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByColor(color) {
+        return db.query("SELECT * FROM cars WHERE color = ?", color).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByFuelType(type) {
+        return db.query("SELECT * FROM cars WHERE fuelType = ?", type).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByCapacity(capacity) {
+        return db.query("SELECT * FROM cars WHERE seatingCapacity = ?", capacity).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCarByYear(year) {
+        return db.query("SELECT * FROM cars WHERE modelYear = ?", year).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateCar(carID, car) {
+        return db.query("UPDATE cars SET title = ?, brandID = ?, locationID = ?, categoryID = ?, color = ?, details = ?, pricePerDay = ?, fuelType = ?, modelYear = ?, seatingCapacity = ?, image1 = ?, image2 = ?, image3 = ?, image4 = ?, registrationDate = ?, lastUpdate = ? WHERE id = ?", [
+            car.title,
+            car.brandID,
+            car.locationID,
+            car.categoryID,
+            car.color,
+            car.details,
+            car.pricePerDay,
+            car.fuelType,
+            car.modelYear,
+            car.seatingCapacity,
+            car.image1,
+            car.image2,
+            car.image3,
+            car.image4,
+            car.registrationDate,
+            car.lastUpdate,
+            carID
+        ]).then(rows => {
+            return rows;
+        }).catch( err => {
+            console.log(err);
+        });
+    }
+
+    deleteCar(carID) {
+        return db.query("DELETE FROM cars WHERE id = ?", carID).then( rows => {
+            return rows;
+        }).catch( err => {
+            console.log(err);
+        })
+    }
+
+    findAllCars() {
+        return db.query("SELECT * FROM cars").then( rows => {
+            return rows;
+        }).catch( err => {
+            console.log(err);
+        });
+    }
 }
 
 module.exports = AppDataManager
