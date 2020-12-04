@@ -326,6 +326,14 @@ class AppDataManager {
         });
     }
 
+    findCarByID(carID) {
+        return db.query("SELECT * FROM cars WHERE id = ?", carID).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     findCarByLocation(locationID) {
         return db.query("SELECT * FROM cars WHERE locationID = ?", locationID).then( rows => {
             return rows;
@@ -420,6 +428,72 @@ class AppDataManager {
         return db.query("SELECT * FROM cars").then( rows => {
             return rows;
         }).catch( err => {
+            console.log(err);
+        });
+    }
+
+    // orders
+    addOrder(order) {
+        return db.query("INSERT INTO orders (userID, carID, fromDate, toDate, details, date, price) VALUES (?, ?, ?, ?, ?, ?, ?)", [
+            order.userID,
+            order.carID,
+            order.fromDate,
+            order.toDate,
+            order.details,
+            order.date,
+            order.price
+        ]).then( rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findOrderByDate(date) {
+        return db.query("SELECT * FROM orders WHERE date LIKE ?", "%" + date + "%").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findOrderByUser(userID) {
+        return db.query("SELECT * FROM orders WHERE userID = ?", userID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateOrder(orderID, order) {
+        return db.query("UPDATE orders SET userID = ?, carID = ?, fromDate = ?, toDate = ?, details = ?, date = ?, price = ? WHERE id = ?", [
+            order.userID,
+            order.carID,
+            order.fromDate,
+            order.toDate,
+            order.details,
+            order.date,
+            order.price,
+            orderID
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    deleteOrder(orderID) {
+        return db.query("DELETE FROM orders WHERE id = ?", orderID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findAllOrders() {
+        return db.query("SELECT * FROM orders").then(rows => {
+            return rows;
+        }).catch(err => {
             console.log(err);
         });
     }

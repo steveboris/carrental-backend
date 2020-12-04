@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `cars` (
     `categoryID` int(11) NOT NULL,
     `color` varchar(20) DEFAULT NULL,
     `details` longtext,
-    `pricePerDay` int(11) DEFAULT NULL,
+    `pricePerDay` Float DEFAULT 0.0,
     `fuelType` varchar(20) DEFAULT NULL,
     `modelYear` int(6) DEFAULT NULL,
     `seatingCapacity` int(11) DEFAULT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `country` varchar(100) DEFAULT NULL,
     `type` varchar(50) NOT NULL,
     `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `lastUpdate` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `lastUpdate` TIMESTAMP  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phone`, `address`, `city`, `country`, `type`,
@@ -126,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
     `fromDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `toDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `details` varchar(255) DEFAULT NULL,
-    `status` int(11) DEFAULT NULL,
-    `postingDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `price` Float NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- INSERT INTO `orders` (`id`, `userID`, `carID`, `fromDate`, `toDate`, `details`, `status`, `postingDate`)
