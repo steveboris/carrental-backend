@@ -5,6 +5,7 @@ const users = require('./routes/users');
 const brands = require('./routes/brands');
 const locations = require('./routes/locations');
 const categories = require('./routes/categories');
+const contacts = require('./routes/contacts');
 
 
 const conn = new database({
@@ -21,5 +22,6 @@ app.use("/api/v1/users", users);
 app.use("/api/v1/brands", brands);
 app.use("/api/v1/locations", locations);
 app.use("/api/v1/categories", categories);
+app.use("/api/v1/contacts", contacts);
 
 app.listen(3000, () => console.log("The server is running and listening on port 3000."));

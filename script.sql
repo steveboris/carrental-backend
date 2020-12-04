@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS brands;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS cars;
-DROP TABLE IF EXISTS contactus;
+DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS categories;
@@ -134,10 +134,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- VALUES (1, 'user@test.com', 1, '2020-02-14 09:34:04', '2020-02-20 09:34:04', 'Danke für die Punktlichkeit', 1, default);
 -- --------------------------------------------------------
 --
--- Table structure for table `contactus`
+-- Table structure for table `contacts`
 --
 
-CREATE TABLE IF NOT EXISTS `contactus` (
+CREATE TABLE IF NOT EXISTS `contacts` (
    `id` int(11) NOT NULL,
    `name` varchar(100) DEFAULT NULL,
    `userID` int(11) NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `contactus` (
    `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
--- INSERT INTO `contactus` (`id`, `Name`, `userID`, `phone`, `details`, `postingDate`, `status`)
+-- INSERT INTO `contacts` (`id`, `Name`, `userID`, `phone`, `details`, `postingDate`, `status`)
 -- VALUES (1, 'Titus', 'tituslepro@test.com', 015623178952, 'I would like to have more information about the rental process', default, 1);
 
 -- --------------------------------------------------------
@@ -164,9 +164,9 @@ ALTER TABLE `brands`
     ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contactus`
+-- Indexes for table `contacts`
 --
-ALTER TABLE `contactus`
+ALTER TABLE `contacts`
     ADD PRIMARY KEY (`id`);
 
 --
@@ -206,9 +206,9 @@ ALTER TABLE `orders`
 ALTER TABLE `brands`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
--- AUTO_INCREMENT for table `contactus`
+-- AUTO_INCREMENT for table `contacts`
 --
-ALTER TABLE `contactus`
+ALTER TABLE `contacts`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
 --
@@ -246,10 +246,10 @@ ALTER TABLE `orders`
     FOREIGN KEY (carID) REFERENCES cars(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 --
--- FOREIGN KEY for table `contactus`
+-- FOREIGN KEY for table `contacts`
 --
-ALTER TABLE `contactus`
-    ADD CONSTRAINT FK_UserContactus
+ALTER TABLE `contacts`
+    ADD CONSTRAINT FK_UserContacts
     FOREIGN KEY (userID) REFERENCES users(id);
 
 --
