@@ -146,9 +146,9 @@ class AppDataManager {
         });
     }
 
-    // location
+    // locations
     addLocation(location) {
-        return db.query("INSERT INTO location (name, country, dateOfCreation) VALUES (?, ?, ?)", [
+        return db.query("INSERT INTO locations (name, country, dateOfCreation) VALUES (?, ?, ?)", [
             location.name,
             location.country,
             location.dateOfCreation
@@ -160,7 +160,7 @@ class AppDataManager {
     }
 
     findLocationByName(name) {
-        return db.query("SELECT * FROM location WHERE name LIKE ?", "%" + name + "%").then(rows => {
+        return db.query("SELECT * FROM locations WHERE name LIKE ?", "%" + name + "%").then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
@@ -168,7 +168,7 @@ class AppDataManager {
     }
 
     updateLocation(locationID, location) {
-        return db.query("UPDATE location SET name = ?, country = ?, dateOfcreation = ? WHERE id = ?", [
+        return db.query("UPDATE locations SET name = ?, country = ?, dateOfcreation = ? WHERE id = ?", [
             location.name,
             location.country,
             location.dateOfCreation,
@@ -181,7 +181,7 @@ class AppDataManager {
     }
 
     deleteLocation(locationID) {
-        return db.query("DELETE FROM location WHERE id = ?", locationID).then(rows => {
+        return db.query("DELETE FROM locations WHERE id = ?", locationID).then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
@@ -189,7 +189,55 @@ class AppDataManager {
     }
 
     findAllLocations() {
-        return db.query("SELECT * FROM location").then(rows => {
+        return db.query("SELECT * FROM locations").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    // categories
+    addCategory(category) {
+        return db.query("INSERT INTO categories (name, dateOfCreation) VALUES (?, ?)", [
+            category.name,
+            category.dateOfCreation
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findCategoryByName(name) {
+        return db.query("SELECT * FROM categories WHERE name LIKE ?", "%" + name + "%").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateCategory(categoryID, category) {
+        return db.query("UPDATE categories SET name = ?, dateOfcreation = ? WHERE id = ?", [
+            category.name,
+            category.dateOfCreation,
+            categoryID
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    deleteCategory(categoryID) {
+        return db.query("DELETE FROM categories WHERE id = ?", categoryID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findAllCategories() {
+        return db.query("SELECT * FROM categories").then(rows => {
             return rows;
         }).catch(err => {
             console.log(err);
