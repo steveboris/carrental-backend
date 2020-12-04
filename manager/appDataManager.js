@@ -243,6 +243,62 @@ class AppDataManager {
             console.log(err);
         });
     }
+
+    // contact
+    addContact(contact) {
+        return db.query("INSERT INTO contacts (name, userID, phone, details, postingDate, status) VALUES (?, ?, ?, ?, ?, ?)", [
+            contact.name,
+            contact.userID,
+            contact.phone,
+            contact.details,
+            contact.postingDate,
+            contact.status
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findContactByUser(userID) {
+        return db.query("SELECT * FROM contacts WHERE userID = ?", userID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    updateContact(contactID, contact) {
+        return db.query("UPDATE contacts SET name = ?, userID = ?, phone = ?, details = ?, postingDate = ?, status = ? WHERE id = ?", [
+            contact.name,
+            contact.userID,
+            contact.phone,
+            contact.details,
+            contact.postingDate,
+            contact.status,
+            contactID
+        ]).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    deleteContact(contactID) {
+        return db.query("DELETE FROM contacts WHERE id = ?", contactID).then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findAllContacts() {
+        return db.query("SELECT * FROM contacts").then(rows => {
+            return rows;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 }
 
 module.exports = AppDataManager
